@@ -1,0 +1,150 @@
+// variables
+$cyanColor: hsl(179,62%,43%);
+$brightYellow: hsl(71,73%,54%);
+$lightCray: hsl(204,43%,93%);
+$grayishBlue: hsl(218,22%,67%);
+$font: 16px;
+
+// mixin
+@mixin screen-for-desktop{
+    @media screen and (min-width: 768px) {
+        @content
+    }
+}
+
+// general variables
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button{
+    border: none;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: $font;
+    background: $lightCray;
+    color: $grayishBlue;
+    font-family: 'Karla', sans-serif;
+    font-weight: 400;
+}
+
+h2{
+    font-size: $font + 1px;
+    font-weight: 700;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-areas: 
+        "row-big"
+        "row-small-primary"
+        "row-small-seconday";    
+    grid-template-rows: repeat(3, 255px);
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    width: 80%;
+    
+    @include screen-for-desktop{
+        grid-template-areas: 
+        "row-big row-big"
+        "row-small-primary row-small-secondarys";
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 200px 1fr;
+    }
+
+
+}
+
+.container__row-big{
+    grid-area: row-big;
+    grid-row: 1 / 2;
+    padding: 2em 1em;
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    @include screen-for-desktop{
+        padding: 2em 2em;
+    }
+
+    h1{
+        font-size: $font + 5px;
+        color: $cyanColor;
+        font-weight: 700;
+    }
+
+    h2{
+        padding: 1em 0;
+        color: $brightYellow;
+    }
+    p{
+        line-height: 1.7;
+        font-size: 14px;
+    }
+}
+
+.container__row-small--primary{
+    grid-area: row-small-primary;
+    padding: 2em 1em;
+    background: $cyanColor;
+    color: #fff;
+    @include screen-for-desktop{
+        padding: 2em 2em;
+    }
+    .row-small__price{
+        padding: 2em 0;
+
+        .price--text{
+            padding-bottom: 1em;
+            .price--big{
+                font-size: $font + 10px;
+                padding-right: .5em;
+                color: #fff;
+                font-weight: 700;
+            }
+        }
+        p{
+            color: rgba($color: $lightCray, $alpha: .9);
+        }
+    }
+    .price--button{
+        width: 100%;
+        background: $brightYellow;
+        color: #fff;
+        padding: 1em 0;
+        border-radius: 5px;
+        font-size: 17px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.container__row-small--secondary{
+    grid-area: row-small-seconday;
+    padding: 2em 1em;
+    background: rgba(42, 178, 175, 0.7);
+    color: $lightCray;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    @include screen-for-desktop{
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+        padding: 2em 2em;
+    }
+
+    ul{
+        color: rgba($color: $lightCray, $alpha: .9);
+        list-style: none;
+        padding-top: 2em;
+        font-size: 14px;
+        line-height: 1.4;   
+    }
+}
